@@ -124,14 +124,14 @@ See [§8](#8-notifications-system) for scheduling and delivery design.
 
 | Layer | Choice | Notes |
 |---|---|---|
-| Framework | **Laravel 11** | Fits cPanel/PHP; batteries-included auth, queues, scheduler, mail. |
-| Interactivity | **Livewire 3 + Alpine.js** | Rich, app-like UI without an SPA build pipeline. |
-| Styling | **Tailwind CSS** | With RTL logical utilities; small CSS build. |
-| Database | **MySQL 8** (or MariaDB 10.6+) | Standard on cPanel. |
+| Framework | **Laravel 13** | Fits cPanel/PHP; batteries-included auth, queues, scheduler, mail. |
+| Interactivity | **Livewire 4 + Alpine.js** | Rich, app-like UI without an SPA build pipeline. |
+| Styling | **Tailwind CSS 4** | With RTL logical utilities; small CSS build via Vite. |
+| Database | **MySQL 8** (or MariaDB 10.6+) in prod; SQLite for local dev | Standard on cPanel. |
 | PWA | Service worker + Web App Manifest | Installable, offline shell, web push. |
-| Auth | Laravel Breeze/Fortify + **Laravel Socialite** (Google) | Email/password + Google OAuth. |
-| Prayer times | `islamic-network/prayer-times` (PHP) | Local computation, no external API. |
-| Hijri dates | `islamic-network/hijri-date` (PHP) | Hijri calendar display. |
+| Auth | Custom controllers + **Laravel Socialite** (Google) | Email/password + Google OAuth. |
+| Prayer times | Self-contained `App\Services\PrayerTimes` | Local astronomical calc, no external dependency. |
+| Hijri dates | `App\Services\HijriDate` via PHP `intl` (Umm al-Qura) | No external package. |
 | Web push | `minishlink/web-push` (VAPID) | Free; no third-party push cost. |
 | Charts | Lightweight JS (e.g. Chart.js via CDN or bundled) | For stats/goals. |
 
@@ -158,10 +158,10 @@ Shared hosting has no long-running processes, so the design leans on **cron**:
   batched from the queue. (A transactional provider remains an easy swap later —
   mail is config-driven.)
 - **Document root.** cPanel must point the domain at Laravel's `public/`
-  directory (or use a safe `public_html` shim), and PHP must be **8.2+**.
+  directory (or use a safe `public_html` shim), and PHP must be **8.3+**.
 
 > **Hosting requirements to confirm** (see [§13](#13-open-questions--requirements)):
-> PHP ≥ 8.2, Composer available (or build/upload vendor), cron access, ability
+> PHP ≥ 8.3, Composer available (or build/upload vendor), cron access, ability
 > to set the web root to `public/`, and MySQL access.
 
 ### 4.3 Internationalization (i18n) & RTL
@@ -400,7 +400,7 @@ accessible (contrast, tap targets) · documented.
 
 To confirm before/around Phase 0:
 
-1. **Hosting specifics:** PHP version (need **≥ 8.2**), Composer/SSH access,
+1. **Hosting specifics:** PHP version (need **≥ 8.3**), Composer/SSH access,
    cron availability, ability to set web root to `public/`, MySQL version.
 2. **Domain email DNS:** can we add **SPF/DKIM/DMARC** for saout.net? (Critical
    for recap-email deliverability on cPanel SMTP.)
