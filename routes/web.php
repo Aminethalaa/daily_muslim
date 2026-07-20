@@ -46,7 +46,10 @@ Route::middleware('auth')->group(function () {
 
     // App
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('quran', [PageController::class, 'quran'])->name('quran');
+    Route::get('quran', [\App\Http\Controllers\QuranController::class, 'index'])->name('quran');
+    Route::get('quran/surah/{surah}', [\App\Http\Controllers\QuranController::class, 'show'])->name('quran.show');
+    Route::post('quran/log', [\App\Http\Controllers\QuranController::class, 'logReading'])->name('quran.log');
+    Route::post('quran/bookmark', [\App\Http\Controllers\QuranController::class, 'bookmark'])->name('quran.bookmark');
     Route::get('azkar', [PageController::class, 'azkar'])->name('azkar');
     Route::get('azkar/{key}', \App\Livewire\AzkarSession::class)->name('azkar.session');
     Route::get('progress', [PageController::class, 'progress'])->name('progress');

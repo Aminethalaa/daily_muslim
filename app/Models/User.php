@@ -61,6 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(QuranSession::class);
     }
 
+    public function quranBookmarks(): HasMany
+    {
+        return $this->hasMany(QuranBookmark::class);
+    }
+
     public function azkarLogs(): HasMany
     {
         return $this->hasMany(AzkarLog::class);

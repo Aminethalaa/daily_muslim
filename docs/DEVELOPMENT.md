@@ -73,12 +73,19 @@ Account page (Arabic / English / French scaffolded).
   sleep), interactive **tap counters** (Livewire + Alpine) with per-item repeat
   counts, completion persistence, and gamification (XP + streak). Seed with
   `php artisan db:seed`.
+- **Quran:** bundled Uthmani text (114 surahs, offline), a searchable surah
+  index with continue-reading + daily-goal progress, and a **mushaf reader**
+  (adjustable font size, tap-to-bookmark ayat, per-surah Alafasy audio,
+  surah navigation) with a reading-session tracker feeding the daily goal,
+  khatma progress, and gamification (XP + streak). See
+  [`CONTENT_SOURCES.md`](CONTENT_SOURCES.md) for attribution.
 - **Gamification core:** points/XP, levels, streaks (with freezes), auditable
   `xp_events` ledger, daily anti-farming caps.
 - **Full data model** for all pillars + gamification + groups + notifications.
 
 ### Next phases (see FRAMEWORK.md §11)
 
-- Quran reader (text + audio) & full tracker.
 - Sadaka amounts/goals/charts; badges; groups & leaderboards.
 - Web push wiring (VAPID) + daily recap & weekly emails via the scheduler.
+- Quran enhancements: per-ayah audio highlighting, page (mushaf) navigation,
+  offline audio download.

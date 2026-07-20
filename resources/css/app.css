@@ -175,4 +175,15 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    /* Tappable Quran ayah */
+    .quran-ayah {
+        cursor: pointer;
+        padding: 0 2px;
+        transition: background 0.15s;
+    }
 }

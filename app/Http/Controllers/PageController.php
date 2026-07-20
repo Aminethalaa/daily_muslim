@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function quran(Request $request)
-    {
-        return view('pages.quran', [
-            'progress' => $request->user()->quranProgress,
-        ]);
-    }
-
     public function azkar(Request $request)
     {
         $user = $request->user();
