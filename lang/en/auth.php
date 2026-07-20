@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'failed' => 'These credentials do not match our records.',
+    'password' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
+    'login' => 'Log in',
+    'register' => 'Create account',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password_label' => 'Password',
+    'password_confirm' => 'Confirm password',
+    'remember' => 'Remember me',
+    'forgot' => 'Forgot your password?',
+    'no_account' => "Don't have an account?",
+    'have_account' => 'Already have an account?',
+    'or' => 'or',
+    'continue_google' => 'Continue with Google',
+    'login_subtitle' => 'Continue your worship journey',
+    'register_subtitle' => 'Begin your journey to consistency',
+    'agree_terms' => 'By creating an account you agree to the terms of use.',
+    'verify_title' => 'Verify your email',
+    'verify_body' => 'We sent a verification link to your email. Please open it to activate your account.',
+    'verify_resend' => 'Resend verification link',
+    'verify_sent' => 'A new verification link has been sent.',
+    'reset_title' => 'Reset your password',
+    'reset_send' => 'Send reset link',
+    'reset_link_sent' => 'We have emailed your password reset link.',
+];

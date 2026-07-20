@@ -1,0 +1,18 @@
+{
+    "name": "صوت — رفيقك اليومي للعبادة",
+    "short_name": "صوت",
+    "description": "تابِع صلواتك وقراءتك للقرآن وأذكارك وصدقاتك مع تذكيرات يومية ونظام تحفيزي.",
+    "lang": "ar",
+    "dir": "rtl",
+    "start_url": "/dashboard",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#faf8f3",
+    "theme_color": "#0f382d",
+    "icons": [
+        { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+        { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+        { "src": "/icons/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ]
+}
