@@ -65,8 +65,8 @@ class DashboardController extends Controller
 
         $azkarDone = $user->azkarLogs()
             ->whereDate('date', $today)
-            ->whereColumn('completed_count', '>=', 'total')
-            ->where('total', '>', 0)
+            ->whereNotNull('completed_at')
+            ->whereHas('category', fn ($q) => $q->whereIn('key', ['morning', 'evening']))
             ->count();
 
         $sadakaDone = $user->sadakaLogs()->whereDate('date', $today)->exists();

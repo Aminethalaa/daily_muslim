@@ -57,7 +57,7 @@ Account page (Arabic / English / French scaffolded).
    ```
 7. **Email deliverability:** add **SPF, DKIM, DMARC** DNS records for saout.net.
 
-## What's built so far (Phase 0–1 foundation)
+## What's built so far
 
 - Laravel 13 + Livewire 4 + Tailwind 4, **Arabic RTL** shell, dark mode.
 - **Auth:** register, login, logout, password reset, email verification,
@@ -69,12 +69,16 @@ Account page (Arabic / English / French scaffolded).
   auto-location + manual override, Umm al-Qura Hijri dates.
 - **Home dashboard:** next-prayer countdown, tap-to-mark prayers, today's
   worship checklist (Quran / Azkar / Sadaka), level & XP bar.
+- **Azkar library:** authentic seeded content (morning, evening, after-salah,
+  sleep), interactive **tap counters** (Livewire + Alpine) with per-item repeat
+  counts, completion persistence, and gamification (XP + streak). Seed with
+  `php artisan db:seed`.
 - **Gamification core:** points/XP, levels, streaks (with freezes), auditable
   `xp_events` ledger, daily anti-farming caps.
 - **Full data model** for all pillars + gamification + groups + notifications.
 
 ### Next phases (see FRAMEWORK.md §11)
 
-- Quran reader (text + audio) & full tracker; Azkar library with counters.
+- Quran reader (text + audio) & full tracker.
 - Sadaka amounts/goals/charts; badges; groups & leaderboards.
 - Web push wiring (VAPID) + daily recap & weekly emails via the scheduler.

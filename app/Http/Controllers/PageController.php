@@ -14,9 +14,23 @@ class PageController extends Controller
         ]);
     }
 
-    public function azkar()
+    public function azkar(Request $request)
     {
-        return view('pages.azkar');
+        $user = $request->user();
+        $tz = $user->timezone ?: config('app.timezone', 'UTC');
+        $today = \Carbon\Carbon::now($tz)->toDateString();
+
+        $categories = \App\Models\AzkarCategory::withCount('items')->orderBy('sort')->get();
+        $doneKeys = $user->azkarLogs()
+            ->whereDate('date', $today)
+            ->whereNotNull('completed_at')
+            ->pluck('category_id')
+            ->all();
+
+        return view('pages.azkar', [
+            'categories' => $categories,
+            'doneIds' => $doneKeys,
+        ]);
     }
 
     public function progress(Request $request)

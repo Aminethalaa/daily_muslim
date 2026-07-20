@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('quran', [PageController::class, 'quran'])->name('quran');
     Route::get('azkar', [PageController::class, 'azkar'])->name('azkar');
+    Route::get('azkar/{key}', \App\Livewire\AzkarSession::class)->name('azkar.session');
     Route::get('progress', [PageController::class, 'progress'])->name('progress');
     Route::get('account', [PageController::class, 'account'])->name('account');
     Route::post('account/prayer', [PageController::class, 'updatePrayer'])->name('account.prayer');
