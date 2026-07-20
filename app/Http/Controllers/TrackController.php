@@ -39,36 +39,9 @@ class TrackController extends Controller
             $game->award($user, 'prayer', self::PRAYER_XP[$prayer] ?? 10, "prayer:$prayer:$date", $today);
             $streaks->touch($user, 'salat', $today);
             $streaks->touch($user, 'overall', $today);
+            app(\App\Services\Badges::class)->evaluate($user);
         }
 
         return back();
-    }
-
-    public function sadaka(Request $request, Gamification $game, Streaks $streaks)
-    {
-        $user = $request->user();
-        $tz = $user->timezone ?: config('app.timezone', 'UTC');
-        $today = Carbon::now($tz);
-        $date = $today->toDateString();
-
-        $data = $request->validate([
-            'amount' => ['nullable', 'numeric', 'min:0'],
-            'category' => ['nullable', 'string', 'max:32'],
-            'note' => ['nullable', 'string', 'max:255'],
-        ]);
-
-        $user->sadakaLogs()->create([
-            'date' => $date,
-            'amount' => $data['amount'] ?? null,
-            'currency' => $user->country ? null : 'USD',
-            'category' => $data['category'] ?? 'general',
-            'note' => $data['note'] ?? null,
-        ]);
-
-        $game->award($user, 'sadaka', 8, "sadaka:$date", $today);
-        $streaks->touch($user, 'sadaka', $today);
-        $streaks->touch($user, 'overall', $today);
-
-        return back()->with('status', __('common.done'));
     }
 }

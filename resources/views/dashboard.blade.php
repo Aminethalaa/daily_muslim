@@ -94,8 +94,7 @@
         </a>
 
         {{-- Sadaka --}}
-        <form method="POST" action="{{ route('track.sadaka') }}" class="card flex items-center gap-4 p-4">
-            @csrf
+        <a href="{{ route('sadaka') }}" class="card flex items-center gap-4 p-4">
             <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-600/10 text-primary-600 dark:text-primary-300">
                 <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11z"/></svg>
             </span>
@@ -106,9 +105,9 @@
             @if ($sadakaDone)
                 <span class="chip bg-primary-600 text-white">{{ __('common.done') }} ✓</span>
             @else
-                <button type="submit" class="chip bg-primary-600 text-white">+ {{ __('common.done') }}</button>
+                <span class="chip bg-primary-600/10 text-primary-700 dark:text-primary-300">+ سجّل</span>
             @endif
-        </form>
+        </a>
     </div>
 
     {{-- Level progress --}}

@@ -31,9 +31,26 @@
         @endforeach
     </div>
 
-    {{-- Badges placeholder --}}
-    <h2 class="section-title mb-3">الأوسمة</h2>
-    <div class="rounded-3xl border border-dashed border-primary-300 bg-primary-50/50 p-6 text-center dark:border-white/10 dark:bg-white/5">
-        <p class="text-sm text-ink-900/60 dark:text-sand-100/60">ستحصل على أوسمة عند بلوغ الإنجازات — أسبوع كامل، ٤٠ يوماً، أول ختمة، وغيرها.</p>
+    {{-- Badges --}}
+    <div class="mb-3 flex items-center justify-between">
+        <h2 class="section-title">الأوسمة</h2>
+        <span class="text-xs text-ink-900/50 dark:text-sand-100/50">{{ $earned->count() }} / {{ $catalog->count() }}</span>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+        @foreach ($catalog as $badge)
+            @php($has = $earned->has($badge->id))
+            @php($tierColor = ['bronze' => 'from-amber-600 to-amber-800', 'silver' => 'from-slate-400 to-slate-600', 'gold' => 'from-gold-400 to-gold-600'][$badge->tier] ?? 'from-primary-500 to-primary-700')
+            <div class="card flex flex-col items-center gap-2 p-3 text-center {{ $has ? '' : 'opacity-45' }}">
+                <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br {{ $has ? $tierColor : 'from-sand-200 to-sand-300 dark:from-white/10 dark:to-white/5' }} text-white shadow-sm">
+                    @if ($has)
+                        <svg viewBox="0 0 24 24" class="h-7 w-7" fill="currentColor"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.5L5.7 20l2.3-7-6-4.4h7.6z"/></svg>
+                    @else
+                        <svg viewBox="0 0 24 24" class="h-6 w-6 text-ink-900/40 dark:text-sand-100/40" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    @endif
+                </span>
+                <p class="text-xs font-semibold text-ink-900 dark:text-sand-100">{{ $badge->name_ar }}</p>
+                <p class="text-[10px] leading-tight text-ink-900/45 dark:text-sand-100/45">{{ $badge->description_ar }}</p>
+            </div>
+        @endforeach
     </div>
 </x-layouts.app>

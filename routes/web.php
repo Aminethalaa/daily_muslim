@@ -63,7 +63,12 @@ Route::middleware('auth')->group(function () {
 
     // Tracking actions
     Route::post('track/prayer/{prayer}', [\App\Http\Controllers\TrackController::class, 'prayer'])->name('track.prayer');
-    Route::post('track/sadaka', [\App\Http\Controllers\TrackController::class, 'sadaka'])->name('track.sadaka');
+
+    // Sadaka
+    Route::get('sadaka', [\App\Http\Controllers\SadakaController::class, 'index'])->name('sadaka');
+    Route::post('sadaka', [\App\Http\Controllers\SadakaController::class, 'store'])->name('sadaka.store');
+    Route::post('sadaka/goal', [\App\Http\Controllers\SadakaController::class, 'setGoal'])->name('sadaka.goal');
+    Route::delete('sadaka/{log}', [\App\Http\Controllers\SadakaController::class, 'destroy'])->name('sadaka.destroy');
 
     // Locale switch
     Route::post('locale', function (\Illuminate\Http\Request $request) {

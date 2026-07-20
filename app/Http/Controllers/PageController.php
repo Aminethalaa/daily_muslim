@@ -26,11 +26,20 @@ class PageController extends Controller
         ]);
     }
 
-    public function progress(Request $request)
+    public function progress(Request $request, \App\Services\Badges $badges)
     {
         $user = $request->user()->loadMissing('stats', 'streaks');
 
-        return view('pages.progress', ['user' => $user]);
+        $badges->evaluate($user); // award anything newly earned
+
+        $earned = $user->badges()->pluck('earned_at', 'badges.id');
+        $catalog = \App\Models\Badge::orderBy('sort')->get();
+
+        return view('pages.progress', [
+            'user' => $user,
+            'catalog' => $catalog,
+            'earned' => $earned,
+        ]);
     }
 
     public function account(Request $request)

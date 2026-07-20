@@ -95,6 +95,7 @@ class AzkarSession extends Component
         app(Gamification::class)->award($user, 'azkar', 8, "azkar:{$this->category->key}:".$date->toDateString(), $date);
         app(Streaks::class)->touch($user, 'azkar', $date);
         app(Streaks::class)->touch($user, 'overall', $date);
+        app(\App\Services\Badges::class)->evaluate($user);
     }
 
     protected function persistProgress(): void

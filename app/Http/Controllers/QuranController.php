@@ -82,6 +82,7 @@ class QuranController extends Controller
         $game->award($user, 'quran', $xp, "quran:$date:".$data['surah'].':'.$now->timestamp, $now);
         $streaks->touch($user, 'quran', $now);
         $streaks->touch($user, 'overall', $now);
+        app(\App\Services\Badges::class)->evaluate($user);
 
         return back()->with('status', __('common.done'));
     }

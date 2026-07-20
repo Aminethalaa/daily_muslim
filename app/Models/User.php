@@ -76,6 +76,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(SadakaLog::class);
     }
 
+    public function sadakaGoals(): HasMany
+    {
+        return $this->hasMany(SadakaGoal::class);
+    }
+
     public function streaks(): HasMany
     {
         return $this->hasMany(Streak::class);
@@ -84,6 +89,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function xpEvents(): HasMany
     {
         return $this->hasMany(XpEvent::class);
+    }
+
+    public function badges(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')
+            ->withPivot('earned_at')->withTimestamps();
     }
 
     public function pushSubscriptions(): HasMany

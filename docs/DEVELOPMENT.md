@@ -79,8 +79,12 @@ Account page (Arabic / English / French scaffolded).
   surah navigation) with a reading-session tracker feeding the daily goal,
   khatma progress, and gamification (XP + streak). See
   [`CONTENT_SOURCES.md`](CONTENT_SOURCES.md) for attribution.
+- **Sadaka tracker:** private amount logging with categories and notes, a
+  monthly goal + progress, a by-category breakdown, and recent history — all
+  private (amounts never leave the user's account).
 - **Gamification core:** points/XP, levels, streaks (with freezes), auditable
-  `xp_events` ledger, daily anti-farming caps.
+  `xp_events` ledger, daily anti-farming caps, and **badges/achievements**
+  (seeded catalog, evaluated on every worship action and on the Progress page).
 - **Notifications:** web push (VAPID) with a subscription flow + service-worker
   handler; per-prayer push reminders (`saout:send-prayer-reminders`); a
   beautiful Arabic **daily recap email** (`saout:send-recap`) sent at each
