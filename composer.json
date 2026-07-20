@@ -3,15 +3,18 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "islamic-network/prayer-times": "*",
         "laravel/framework": "^13.8",
         "laravel/socialite": "^5.28",
         "laravel/tinker": "^3.0",
-        "livewire/livewire": "^4.3"
+        "livewire/livewire": "^4.3",
+        "minishlink/web-push": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

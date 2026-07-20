@@ -81,11 +81,24 @@ Account page (Arabic / English / French scaffolded).
   [`CONTENT_SOURCES.md`](CONTENT_SOURCES.md) for attribution.
 - **Gamification core:** points/XP, levels, streaks (with freezes), auditable
   `xp_events` ledger, daily anti-farming caps.
+- **Notifications:** web push (VAPID) with a subscription flow + service-worker
+  handler; per-prayer push reminders (`saout:send-prayer-reminders`); a
+  beautiful Arabic **daily recap email** (`saout:send-recap`) sent at each
+  user's chosen local hour; notification preferences UI on the Account page. All
+  driven by the Laravel scheduler (`routes/console.php`).
 - **Full data model** for all pillars + gamification + groups + notifications.
+
+### Enabling notifications
+
+```bash
+php artisan saout:vapid          # generate VAPID keys → paste into .env
+```
+
+Push needs HTTPS in the browser; the daily recap uses your mail driver
+(cPanel SMTP in production, `log` locally). The scheduler runs everything from a
+single per-minute cron entry (see the cPanel section above).
 
 ### Next phases (see FRAMEWORK.md §11)
 
 - Sadaka amounts/goals/charts; badges; groups & leaderboards.
-- Web push wiring (VAPID) + daily recap & weekly emails via the scheduler.
-- Quran enhancements: per-ayah audio highlighting, page (mushaf) navigation,
-  offline audio download.
+- Weekly summary email; per-ayah Quran audio highlighting; mushaf page navigation.

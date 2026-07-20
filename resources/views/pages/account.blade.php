@@ -77,6 +77,45 @@
         <button type="submit" class="btn-primary w-full">{{ __('common.save') }}</button>
     </form>
 
+    {{-- Notifications --}}
+    <h2 class="section-title mb-3">الإشعارات والتذكيرات</h2>
+    <div class="card mb-5 p-5">
+        <button type="button" onclick="Saout.enablePush(this)" class="btn-primary mb-4 w-full" {{ $pushEnabled ? 'disabled' : '' }}>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            {{ $pushEnabled ? 'الإشعارات مُفعّلة ✓' : 'تفعيل إشعارات المتصفّح' }}
+        </button>
+
+        <form method="POST" action="{{ route('account.notifications') }}" class="space-y-3">
+            @csrf
+            @foreach ([
+                'prayer_reminders' => 'تذكير بأوقات الصلاة',
+                'azkar_reminders' => 'تذكير بالأذكار',
+                'quran_reminder' => 'تذكير بورد القرآن',
+                'email_recap' => 'ملخّص يومي بالبريد',
+                'email_weekly' => 'ملخّص أسبوعي بالبريد',
+            ] as $field => $label)
+                <label class="flex items-center justify-between">
+                    <span class="text-sm text-ink-900/80 dark:text-sand-100/80">{{ $label }}</span>
+                    <input type="checkbox" name="{{ $field }}" value="1" @checked($notif->$field)
+                           class="h-5 w-9 appearance-none rounded-full bg-sand-300 checked:bg-primary-600 transition relative cursor-pointer
+                                  before:absolute before:top-0.5 before:h-4 before:w-4 before:rounded-full before:bg-white before:transition-all
+                                  before:start-0.5 checked:before:start-[1.125rem] dark:bg-white/10">
+                </label>
+            @endforeach
+
+            <label class="flex items-center justify-between pt-1">
+                <span class="text-sm text-ink-900/80 dark:text-sand-100/80">وقت الملخّص اليومي</span>
+                <select name="recap_hour" class="rounded-xl border border-sand-300 bg-white px-3 py-1.5 text-sm dark:border-white/10 dark:bg-ink-900 dark:text-sand-100">
+                    @for ($h = 0; $h < 24; $h++)
+                        <option value="{{ $h }}" @selected($notif->recap_hour == $h)>{{ sprintf('%02d:00', $h) }}</option>
+                    @endfor
+                </select>
+            </label>
+
+            <button type="submit" class="btn-ghost w-full">{{ __('common.save') }}</button>
+        </form>
+    </div>
+
     {{-- Language --}}
     <h2 class="section-title mb-3">اللغة</h2>
     <form method="POST" action="{{ route('locale.set') }}" class="card mb-5 flex flex-wrap gap-2 p-4">

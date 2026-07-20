@@ -35,10 +35,38 @@ class PageController extends Controller
 
     public function account(Request $request)
     {
+        $user = $request->user();
+
         return view('pages.account', [
-            'user' => $request->user(),
+            'user' => $user,
             'methods' => PrayerTimes::METHODS,
+            'notif' => $user->notificationSetting()->firstOrCreate([]),
+            'pushEnabled' => $user->pushSubscriptions()->exists(),
         ]);
+    }
+
+    public function updateNotifications(Request $request)
+    {
+        $data = $request->validate([
+            'prayer_reminders' => ['nullable', 'boolean'],
+            'azkar_reminders' => ['nullable', 'boolean'],
+            'quran_reminder' => ['nullable', 'boolean'],
+            'email_recap' => ['nullable', 'boolean'],
+            'email_weekly' => ['nullable', 'boolean'],
+            'recap_hour' => ['nullable', 'integer', 'between:0,23'],
+        ]);
+
+        $setting = $request->user()->notificationSetting()->firstOrCreate([]);
+        $setting->update([
+            'prayer_reminders' => $request->boolean('prayer_reminders'),
+            'azkar_reminders' => $request->boolean('azkar_reminders'),
+            'quran_reminder' => $request->boolean('quran_reminder'),
+            'email_recap' => $request->boolean('email_recap'),
+            'email_weekly' => $request->boolean('email_weekly'),
+            'recap_hour' => $data['recap_hour'] ?? $setting->recap_hour,
+        ]);
+
+        return back()->with('status', __('common.done'));
     }
 
     public function updatePrayer(Request $request)

@@ -55,6 +55,11 @@ Route::middleware('auth')->group(function () {
     Route::get('progress', [PageController::class, 'progress'])->name('progress');
     Route::get('account', [PageController::class, 'account'])->name('account');
     Route::post('account/prayer', [PageController::class, 'updatePrayer'])->name('account.prayer');
+    Route::post('account/notifications', [PageController::class, 'updateNotifications'])->name('account.notifications');
+
+    // Web push
+    Route::post('push/subscribe', [\App\Http\Controllers\PushController::class, 'subscribe'])->name('push.subscribe');
+    Route::post('push/unsubscribe', [\App\Http\Controllers\PushController::class, 'unsubscribe'])->name('push.unsubscribe');
 
     // Tracking actions
     Route::post('track/prayer/{prayer}', [\App\Http\Controllers\TrackController::class, 'prayer'])->name('track.prayer');
